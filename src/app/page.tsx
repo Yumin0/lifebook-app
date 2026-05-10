@@ -21,22 +21,14 @@ export default async function HomePage() {
         className="absolute inset-0 bg-cover bg-no-repeat"
         style={{
           backgroundImage: "url('/hero-bg.png')",
-          backgroundPosition: 'center 40%',
+          backgroundPosition: 'right 20%',
         }}
       />
 
       {/* Content layer */}
       <div className="relative z-10 flex flex-col min-h-screen">
-        {/* Header */}
-        <div className="flex items-center justify-between px-5 pt-14">
-          <button className="text-[#5C4033] text-2xl font-light leading-none">≡</button>
-          <button className="text-[#5C4033]">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <circle cx="12" cy="8" r="4" />
-              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-            </svg>
-          </button>
-        </div>
+        {/* Header spacer */}
+        <div className="pt-14" />
 
         {/* Hero text */}
         <div className="px-6 mt-10 flex-1">
