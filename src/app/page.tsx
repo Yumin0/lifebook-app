@@ -21,7 +21,7 @@ export default async function HomePage() {
         className="absolute inset-0 bg-cover bg-no-repeat"
         style={{
           backgroundImage: "url('/hero-bg.png')",
-          backgroundPosition: 'right 20%',
+          backgroundPosition: 'right 65%',
         }}
       />
 
