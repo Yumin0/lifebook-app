@@ -21,7 +21,7 @@ export default async function HomePage() {
         className="absolute inset-0 bg-cover bg-no-repeat"
         style={{
           backgroundImage: "url('/hero-bg.png')",
-          backgroundPosition: 'right 65%',
+          backgroundPosition: 'right 80%',
         }}
       />
 
@@ -41,7 +41,7 @@ export default async function HomePage() {
         </div>
 
         {/* Floating bottom card */}
-        <div className="mx-4 mb-10 bg-white rounded-3xl px-6 pt-7 pb-7 shadow-xl">
+        <div className="mx-4 mb-10 bg-white/85 backdrop-blur-sm rounded-3xl px-6 pt-7 pb-7 shadow-xl">
           {/* Pencil icon */}
           <div className="flex justify-center mb-4">
             <div className="w-11 h-11 rounded-full bg-[#FBF7F2] flex items-center justify-center">
