@@ -41,7 +41,7 @@ const SYSTEM_PROMPT = `你是一位擅長撰寫「人生故事」與「人物傳
 
 
 請讓整體讀起來：溫柔、真實、安靜、有回憶感、像深夜閱讀一本人生故事。`
----
+
 type BiographyResult = {
   title: string
   subtitle: string
