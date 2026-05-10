@@ -1,11 +1,9 @@
 import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
+import { OWNER_USER_ID } from '@/lib/config'
 import Link from 'next/link'
 
 export default async function QuestionsPage() {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/auth')
 
   const { data: questions } = await supabase
     .from('questions')
@@ -16,7 +14,7 @@ export default async function QuestionsPage() {
   const { data: answers } = await supabase
     .from('answers')
     .select('question_id, updated_at')
-    .eq('user_id', user.id)
+    .eq('user_id', OWNER_USER_ID)
 
   const answeredMap = new Map(answers?.map(a => [a.question_id, a.updated_at]) ?? [])
   const total = questions?.length ?? 10
@@ -54,7 +52,7 @@ export default async function QuestionsPage() {
             const date = answeredAt
               ? new Date(answeredAt).toLocaleDateString('zh-TW', {
                   year: 'numeric', month: '2-digit', day: '2-digit'
-                }).replace(/\//g, '/')
+                })
               : null
 
             return (

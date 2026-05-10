@@ -1,8 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
-import { useRouter } from 'next/navigation'
+import { saveAnswer } from './actions'
 
 const MAX_CHARS = 500
 
@@ -19,29 +18,11 @@ export default function AnswerForm({
 }) {
   const [content, setContent] = useState(initialContent)
   const [saving, setSaving] = useState(false)
-  const router = useRouter()
-  const supabase = createClient()
 
   async function handleSave() {
     if (!content.trim()) return
     setSaving(true)
-
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) { router.push('/auth'); return }
-
-    await supabase.from('answers').upsert(
-      {
-        user_id: user.id,
-        question_id: questionId,
-        content: content.trim(),
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: 'user_id,question_id' }
-    )
-
-    setSaving(false)
-    router.push('/questions')
-    router.refresh()
+    await saveAnswer(questionId, content.trim())
   }
 
   return (

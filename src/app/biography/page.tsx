@@ -1,11 +1,10 @@
 import { createClient } from '@/lib/supabase/server'
+import { OWNER_USER_ID } from '@/lib/config'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 
 export default async function BiographyPage() {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/auth')
 
   const { data: questions } = await supabase
     .from('questions')
@@ -16,12 +15,9 @@ export default async function BiographyPage() {
   const { data: answers } = await supabase
     .from('answers')
     .select('question_id, content')
-    .eq('user_id', user.id)
+    .eq('user_id', OWNER_USER_ID)
 
-  const answeredCount = answers?.length ?? 0
-  const total = questions?.length ?? 10
-
-  if (answeredCount < total) {
+  if ((answers?.length ?? 0) < (questions?.length ?? 10)) {
     redirect('/questions')
   }
 

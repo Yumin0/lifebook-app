@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
-import { redirect, notFound } from 'next/navigation'
+import { OWNER_USER_ID } from '@/lib/config'
+import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import AnswerForm from './AnswerForm'
 
@@ -9,8 +10,6 @@ export default async function QuestionPage({ params }: { params: Promise<{ id: s
   if (isNaN(questionId)) notFound()
 
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/auth')
 
   const { data: question } = await supabase
     .from('questions')
@@ -23,7 +22,7 @@ export default async function QuestionPage({ params }: { params: Promise<{ id: s
   const { data: answer } = await supabase
     .from('answers')
     .select('content')
-    .eq('user_id', user.id)
+    .eq('user_id', OWNER_USER_ID)
     .eq('question_id', questionId)
     .maybeSingle()
 
