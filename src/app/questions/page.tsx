@@ -81,7 +81,7 @@ export default async function QuestionsPage() {
       <div className="fixed bottom-0 left-0 right-0 px-5 pb-10 pt-6 bg-gradient-to-t from-[#FBF7F2] via-[#FBF7F2]/90 to-transparent">
         {completedCount === total ? (
           <Link
-            href="/biography"
+            href="/biography/new"
             className="block w-full bg-[#8B5535] text-white text-center rounded-2xl py-4 text-sm font-semibold"
           >
             生成我的傳記故事

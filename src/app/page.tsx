@@ -5,14 +5,16 @@ import Link from 'next/link'
 export default async function HomePage() {
   const supabase = await createClient()
 
-  const [{ data: questions }, { data: answers }] = await Promise.all([
+  const [{ data: questions }, { data: answers }, { count: biographyCount }] = await Promise.all([
     supabase.from('questions').select('id').eq('level', 1),
     supabase.from('answers').select('question_id').eq('user_id', OWNER_USER_ID),
+    supabase.from('biographies').select('*', { count: 'exact', head: true }).eq('user_id', OWNER_USER_ID),
   ])
 
   const total = questions?.length ?? 10
   const completed = answers?.length ?? 0
   const hasStarted = completed > 0
+  const hasBiographies = (biographyCount ?? 0) > 0
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-[#F0E8DC]">
@@ -92,6 +94,16 @@ export default async function HomePage() {
             {hasStarted ? '繼續回答問題' : '開始回答 10 個問題'}
             <span>→</span>
           </Link>
+
+          {hasBiographies && (
+            <Link
+              href="/biographies"
+              className="flex items-center justify-center gap-1 w-full mt-3 text-sm text-[#8B5535] font-medium py-2"
+            >
+              查看我的傳記
+              <span>›</span>
+            </Link>
+          )}
         </div>
       </div>
     </div>
