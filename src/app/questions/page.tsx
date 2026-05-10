@@ -24,9 +24,11 @@ export default async function QuestionsPage() {
     <div className="min-h-screen bg-[#FBF7F2]">
       {/* Header */}
       <div className="flex items-center justify-between px-5 pt-14 pb-4">
-        <div className="w-8" />
+        <Link href="/" className="text-[#8B5535] text-sm font-medium">
+          ‹ 返回
+        </Link>
         <h1 className="text-base font-semibold text-[#3D2011]">我的傳記計畫</h1>
-        <div className="w-8" />
+        <div className="w-12" />
       </div>
 
       <div className="px-5 pb-36">
